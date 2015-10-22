@@ -1,0 +1,9 @@
+<h1>edit</h1>
+<p>edit post : <%=@post.id%> </p>
+
+<form action= "/timeline/update">
+    <input type="hidden" name="id" value="<%=@post.id%>">
+    <input type="text" name="name" placeholder = "이름" value="<%=@post.user_id%>"> <br>
+    <textarea name ="content"><%=@post.msg%></textarea>
+    <input type="submit">
+</form>

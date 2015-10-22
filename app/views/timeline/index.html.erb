@@ -1,0 +1,37 @@
+<h1>Timeline</h1>
+<%=form_tag '/write', method: 'post' %>
+<div class="form-group">
+        <textarea name="naeyong" class="form-control" row="5"></textarea>
+</div>
+    <div class="form-group">
+    <input type="submit" class="btn btn-success">
+    </div>
+</form>
+
+<ul>
+<% @myblogs.each do |b| %>
+<li><%=b.user.email%> : 
+<div class="well">
+    <%=b.content%>
+</div>
+
+    
+<form action="/comment" method="post">
+    <%=form_tag '/comment', class: "form-inline" do%>
+    <input type="hidden" name="blog_id" value="<%=b.id%>">
+    <div class="form-group">
+    <input type="text" name="comment" class="form-control">
+    </div>
+    <div class="form-group">
+    <input type="submit" class="btn btn-primary">
+    </div>
+ <% end %>
+ <ol>
+ <% b.comments.each do |c| %>
+     <li><%=c.user.email%> : <%=c.msg%></li>
+         <a href="/timeline/edit?id=<%=c.id%>"> Edit </a>
+    <a href="/timeline/destroy?id=<%=c.id%>">Delete</a>
+      <% end %>
+ </ol>
+ </li>
+<% end %>
